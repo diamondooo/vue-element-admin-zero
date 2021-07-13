@@ -94,7 +94,21 @@ export default {
 					},
 				],
 			},
+			redirect: undefined,
+			otherQuery: {},
 		};
+	},
+	watch: {
+		$route: {
+			handler(route) {
+				const query = route.query;
+				if (query) {
+					this.redirect = query.redirect;
+					this.otherQuery = this.getOtherQuery(query);
+				}
+			},
+			immediate: true,
+		},
 	},
 	methods: {
 		// 键盘输入时检查大写锁是否打开，检查规则：没按着shift，还输入了大写，或者按着shift还输入了小写，就判断为Caps Lock是打开的。(按组合键比如sift+a或两次触发这个函数,但是顺序是a然后是shift)
@@ -115,9 +129,31 @@ export default {
 			this.$refs.loginForm.validate((valid) => {
 				if (valid) {
 					this.loading = true;
-					this.$store.dispath("user/login", this.loginForm).then(() => {});
+					this.$store
+						.dispatch("user/login", this.loginForm)
+						.then(() => {
+							this.$router.push({
+								path: this.redirect || "/",
+								query: this.otherQuery,
+							});
+							this.loading = false;
+						})
+						.catch(() => {
+							this.loading = false;
+						});
+				} else {
+					console.log("error submit!!");
+					return false;
 				}
 			});
+		},
+		getOtherQuery(query) {
+			return Object.keys(query).reduce((acc, cur) => {
+				if (cur !== "redirect") {
+					acc[cur] = query[cur];
+				}
+				return acc;
+			}, {});
 		},
 	},
 };
