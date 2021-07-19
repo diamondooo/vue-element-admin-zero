@@ -33,7 +33,7 @@ export default {
 .hamburger {
 	svg {
 		display: inline-block;
-    vertical-align: middle;
+		vertical-align: middle;
 		width: 20px;
 		height: 20px;
 	}
