@@ -9,24 +9,25 @@
 				@open="handleOpen"
 				@close="handleClose"
 			>
-				<!-- <el-submenu index="1">
-						<template slot="title">选项4</template>
-						<el-menu-item index="1-4-1">选项1</el-menu-item>
-				</el-submenu> -->
-				<el-menu-item index="2">
-					<i class="el-icon-menu"></i>
-					<span slot="title">导航二</span>
-				</el-menu-item>
-				
+				<sidebar-item
+					v-for="route in permission_routes"
+					:key="route.path"
+					:item="route"
+					:base-path="route.path"
+				></sidebar-item>
 			</el-menu>
 		</el-scrollbar>
 	</div>
 </template>
 <script>
+import { mapGetters } from "vuex";
 export default {
 	props: {},
 	data() {
 		return {};
+	},
+	computed: {
+		...mapGetters(["permission_routes", "sidebar"]),
 	},
 	methods: {
 		handleOpen(key, keyPath) {
@@ -45,10 +46,10 @@ export default {
 	left: 0;
 	bottom: 0;
 	width: 210px;
-  background-color: #304156;
-  .scrollbar-wrapper{
-    overflow-x: hidden;
-  }
+	background-color: #304156;
+	.scrollbar-wrapper {
+		overflow-x: hidden;
+	}
 	::v-deep {
 		.el-menu {
 			border-right: none;

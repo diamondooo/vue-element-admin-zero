@@ -1,19 +1,11 @@
 <template>
-	<div>
-		<router-view></router-view>
-	</div>
+	<div></div>
 </template>
 <script>
 export default {
-	components: {},
 	props: {},
 	data() {
-		return {
-			jsonData: {
-				a: 1,
-				b: 2,
-			},
-		};
+		return {};
 	},
 	methods: {},
 };
