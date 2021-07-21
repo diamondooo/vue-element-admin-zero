@@ -1,11 +1,13 @@
 <template>
-	<div>
+	<div v-if="item.meta">
 		<!-- icon -->
-		<template v-if="item.meta.icon.includes('el-icon')">
-			<i :class="[item.meta.icon, 'sub-el-icon']" />
-		</template>
-		<template v-else>
-			<svg-icon :icon-class="item.meta.icon"></svg-icon>
+		<template v-if="item.meta && item.meta.icon">
+			<template v-if="item.meta.icon.includes('el-icon')">
+				<i :class="[item.meta.icon, 'sub-el-icon']" />
+			</template>
+			<template v-else>
+				<svg-icon :icon-class="item.meta.icon"></svg-icon>
+			</template>
 		</template>
 		<!-- title -->
 		<span>

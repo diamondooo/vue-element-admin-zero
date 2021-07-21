@@ -17,6 +17,8 @@ Router.prototype.push = function push(location, onResolve, onReject) {
 
 Vue.use(Router);
 
+import nestedRoutes from "./nested";
+
 // Layout
 import Layout from "@/layout";
 
@@ -50,37 +52,48 @@ import Layout from "@/layout";
 export const constantRoutes = [
 	{
 		path: "/login",
+		hidden: true,
 		component: () => import("@/views/login/index"),
 	},
 	{
 		path: "/auth-redirect",
+		hidden: true,
 		component: () => import("@/views/login/auth-redirect"),
 	},
 	{
 		path: "/",
 		component: Layout,
-		redirect: "/dashboard",
+		// redirect: "/dashboard",
 		children: [
 			{
 				path: "dashboard",
 				component: () => import("@/views/dashboard/index"),
 				name: "Dashboard",
+				meta: {
+					title: "dashboard",
+					icon: "dashboard",
+				},
 			},
 		],
 	},
 	{
 		path: "/documentation",
+		// redirect: "/documentation/index",
 		component: Layout,
 		children: [
 			{
 				path: "index",
 				component: () => import("@/views/documentation/index"),
 				name: "Documentation",
+				meta: {
+					title: "Documentation",
+					icon: "documentation",
+				},
 			},
 		],
 	},
 ];
-export const asyncRoutes = [];
+export const asyncRoutes = [nestedRoutes];
 
 const createRouter = () =>
 	new Router({

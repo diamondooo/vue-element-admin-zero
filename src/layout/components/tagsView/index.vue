@@ -25,7 +25,8 @@ export default {
 	},
 	computed: {
 		visitedViews() {
-			return this.$store.state.tagsView.visitedViews;
+			return [];
+			// return this.$store.state.tagsView.visitedViews;
 		},
 	},
 	methods: {},
