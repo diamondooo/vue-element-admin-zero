@@ -138,7 +138,8 @@ export default {
 							});
 							this.loading = false;
 						})
-						.catch(() => {
+						.catch((err) => {
+							err.hideNormalError();
 							this.loading = false;
 						});
 				} else {
