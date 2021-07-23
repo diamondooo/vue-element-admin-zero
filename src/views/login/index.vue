@@ -126,11 +126,22 @@ export default {
 			}
 		},
 		handleLogin() {
+			console.log("执行");
 			this.$refs.loginForm.validate((valid) => {
 				if (valid) {
-					this.loading = true;
+					// this.loading = true;
 					this.$store
-						.dispatch("user/login", this.loginForm)
+						.dispatch("user/login", {
+							userInfo: this.loginForm,
+							settings: {
+								// loading: {
+								// 	target: ".login-form",
+								// },
+								loading: false,
+								error: true,
+								cancelMultipleName: "login",
+							},
+						})
 						.then(() => {
 							this.$router.push({
 								path: this.redirect || "/",
@@ -139,7 +150,8 @@ export default {
 							this.loading = false;
 						})
 						.catch((err) => {
-							err.hideNormalError();
+							// debugger;
+							// err.hideNormalError();
 							this.loading = false;
 						});
 				} else {
