@@ -11,15 +11,15 @@ module.exports = {
 	devServer: {
 		port: 9001,
 		open: true,
-		// before: require("./mock/mock-server.js"),
-		proxy: {
-			"/vue-element-admin": {
-				target: "http://127.0.0.1:3000/mock/11/",
-				pathRewrite: {
-					"^/vue-element-admin": "",
-				},
-			},
-		},
+		before: require("./mock/mock-server.js"),
+		// proxy: {
+		// 	"/vue-element-admin": {
+		// 		target: "http://127.0.0.1:3000/mock/11/",
+		// 		pathRewrite: {
+		// 			"^/vue-element-admin": "",
+		// 		},
+		// 	},
+		// },
 	},
 	chainWebpack(config) {
 		// it can improve the speed of the first screen, it is recommended to turn on preload

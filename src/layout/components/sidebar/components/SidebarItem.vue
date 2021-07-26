@@ -25,7 +25,6 @@
 				v-for="child in item.children"
 				:key="child.name"
 				:item="child"
-				:base-path="resolvePath(child)"
 				class="nest-menu"
 			></sidebar-item>
 		</el-submenu>
@@ -102,14 +101,17 @@ export default {
 				};
 			}
 			let res = this.$router.resolve(route);
+			// console.log(res);
+			// res.href是没有进行重定向的路径，res.route.fullPath是重定向后的路径
 			return {
 				isExternal: false,
-				path: res.route.fullPath,
+				path: res.route.fullPath, //通过router.push可以正确跳转的路径
+				href: res.href, //href的值携带#号，例如#/nested
 			};
 		},
 		resolvePath(route) {
 			let result = this.testPath(route);
-			return result.path;
+			return result.href.split("#")[1];
 		},
 	},
 };

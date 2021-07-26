@@ -1,6 +1,8 @@
 <template>
 	<div>
 		dashboard
+		<div @click="clickRoute">documentation</div>
+		<!-- <router-link to="/documentation" replace> documentation </router-link> -->
 	</div>
 </template>
 <script>
@@ -9,7 +11,11 @@ export default {
 	data() {
 		return {};
 	},
-	methods: {},
+	methods: {
+		clickRoute() {
+			this.$router.replace({ name: "Documentation" });
+		},
+	},
 };
 </script>
 <style scoped lang="scss"></style>

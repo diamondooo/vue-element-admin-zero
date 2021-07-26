@@ -131,17 +131,7 @@ export default {
 				if (valid) {
 					// this.loading = true;
 					this.$store
-						.dispatch("user/login", {
-							userInfo: this.loginForm,
-							settings: {
-								// loading: {
-								// 	target: ".login-form",
-								// },
-								loading: false,
-								error: true,
-								cancelMultipleName: "login",
-							},
-						})
+						.dispatch("user/login", this.loginForm)
 						.then(() => {
 							this.$router.push({
 								path: this.redirect || "/",
